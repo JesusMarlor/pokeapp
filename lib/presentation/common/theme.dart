@@ -11,6 +11,9 @@ class PokeAppColors{
   static final ligthOrange  = Color(0xf7a82a).withOpacity(0.5);
   static final ligthBlue    = Color(0x2ae6f7).withOpacity(0.5);
 
+  static final iconGrey     = Color(0xd8cdcd);
+  static final buttonGreen  = Color(0x52b268);
+
 }
 
 final pokeGradients = [

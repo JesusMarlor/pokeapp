@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pokeapp/presentation/home/home_screen.dart';
 import 'package:provider/provider.dart';
-import './presentation/common/theme.dart';
 import 'MainProvider.dart';
 
 void main() {

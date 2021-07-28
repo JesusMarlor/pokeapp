@@ -32,8 +32,7 @@ class  _HomeScreenState extends State<HomeScreen>{
 
     mainProvider = Provider.of<MainProvider>(context, listen: true);
 
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
           body: Column(
             children: [
               //igual se puede usar un IndexedStack
@@ -69,8 +68,7 @@ class  _HomeScreenState extends State<HomeScreen>{
               BottomBarItem(icon: Icon(Icons.map_outlined), title: Text("Página 3")),
             ],
           ),
-        )
-    );
+        );
   }
 
  }
