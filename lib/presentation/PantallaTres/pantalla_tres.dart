@@ -24,8 +24,10 @@ class  _PantallaTresScreenState extends State<PantallaTresScreen> with WidgetsBi
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       if (state == AppLifecycleState.resumed && mapController != null ) {
-        setState((){
-          mapController.setMapStyle("[]");
+        Future.delayed( Duration( seconds: 1), (){
+          setState((){
+            mapController?.setMapStyle("[]");
+          });
         });
       }
     }
@@ -170,7 +172,7 @@ class MapInfo extends StatelessWidget{
                                           Container(
                                             width : MediaQuery.of(context).size.width * .2,
                                             decoration: BoxDecoration(
-                                              color: Colors.green,
+                                              color: PokeAppColors.buttonGreen,
                                               borderRadius: const BorderRadius.all(Radius.circular(15.0)),
                                             ),
                                             child: Text(""),
@@ -209,7 +211,7 @@ class MapInfo extends StatelessWidget{
                           fit: BoxFit.fitWidth,
                           child: Text("Go!", style: TextStyle( fontSize: 20, color: Colors.white ))),
                       textColor: Colors.black,
-                      color: Colors.green,
+                      color: PokeAppColors.buttonGreen,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                     )
@@ -237,8 +239,9 @@ class SearchBox extends StatelessWidget{
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  IconButton(icon: Icon( Icons.menu, size: 35,), onPressed: ()=> print("press")),
+                  IconButton(icon: Icon( Icons.menu, size: 35,), onPressed: ()=> print("press menu")),
                   Container(
+                    padding: const EdgeInsets.all(5),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: const BorderRadius.all(Radius.circular(8.0)),
@@ -249,7 +252,10 @@ class SearchBox extends StatelessWidget{
                             blurRadius: 10.0),
                       ],
                     ),
-                    child: IconButton(icon: Icon(Icons.send), onPressed: null),
+                    child: InkWell(
+                      onTap: ()=> print("navigation"),
+                      child: Image.asset("assets/navigation.png", height: 25, width: 25,),
+                    ),
                   )
 
                 ],
@@ -271,18 +277,18 @@ class SearchBox extends StatelessWidget{
                   children: [
                     Padding(
                         padding: const EdgeInsets.only(left:3, right: 8, top: 3, bottom: 3),
-                        child: Icon( Icons.location_on_rounded, color: Colors.grey  )
+                        child: Icon( Icons.location_on_rounded, color: PokeAppColors.iconGrey )
                     ),
                     Expanded(
                       child: Text("102 Fordham RD"),
                     ),
                     Padding(
                         padding: const EdgeInsets.all(3),
-                        child: Icon( Icons.close, color: Colors.grey  )
+                        child: Icon( Icons.close, color: PokeAppColors.iconGrey  )
                     ),
                     Padding(
                         padding: const EdgeInsets.all(3),
-                        child: Icon( Icons.list, color: Colors.grey )
+                        child: Icon( Icons.list, color: PokeAppColors.iconGrey  )
                     ),
                   ],
                 ),

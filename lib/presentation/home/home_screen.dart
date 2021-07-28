@@ -19,6 +19,9 @@ class  _HomeScreenState extends State<HomeScreen>{
 
   MainProvider mainProvider;
 
+  /*@override
+  bool get wantKeepAlive => true;*/
+
   @override
   void initState() {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
