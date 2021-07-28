@@ -6,15 +6,16 @@ part of 'pokemon_model.dart';
 
 PokemonModel _$PokemonModelFromJson(Map<String, dynamic> json) {
   return PokemonModel(
-    id:  json['id'] != null ? json['id'] as int : 0,
     name: json['name'],
     type: json['type'],
     url: json['url'],
+      types: (json['Temporadas'] as List)
+          ?.map((e) =>
+      e == null ? null : PokemonType.fromJson(e as Map<String, dynamic>))
   );
 }
 
 Map<String, dynamic> _$PokemonModelToJson(PokemonModel instance) => <String, dynamic>{
-  'id': instance.id,
   'name': instance.name,
   'type': instance.type,
   'url': instance.url,

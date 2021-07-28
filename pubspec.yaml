@@ -25,6 +25,11 @@ dependencies:
     sdk: flutter
   provider: ^4.3.3
   google_maps_flutter: 1.2.0
+  http: ^0.12.2
+  equatable: ^1.0.1
+  pull_to_refresh: 1.6.2
+  lottie: ^0.7.0+1
+  font_awesome_flutter: 8.8.1
 
 
   # The following adds the Cupertino Icons font to your application.
