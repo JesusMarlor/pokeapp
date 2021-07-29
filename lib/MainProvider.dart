@@ -5,7 +5,6 @@ import 'package:pokeapp/data/model/pokemon_model.dart';
 import 'package:pokeapp/data/model/pokemon_specie.dart';
 import 'package:pokeapp/presentation/ResumenPokemon/resumen_pokemonScreen.dart';
 import 'package:pokeapp/repository/pokemon_repository.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class MainProvider extends ChangeNotifier  {
 
@@ -13,7 +12,6 @@ class MainProvider extends ChangeNotifier  {
   PageController pageController = PageController( initialPage:  0 );
   int selectedTabIndex = 0;
   PokemonRepository pokemonRepository = PokemonRepository();
-  RefreshController refreshController = RefreshController(initialRefresh: false);
   List<PokemonModel> listaPokemons = [];
   bool loading = false;
   PokemonModel pokemonModel;
@@ -41,12 +39,9 @@ class MainProvider extends ChangeNotifier  {
       }
       final pokemons = await this.pokemonRepository.fetchPokemons();
       listaPokemons.addAll(pokemons);
-
       listaPokemons.forEach((element) {
         element.type = Utils.getType(element.name);
       });
-      refreshController.refreshCompleted();
-      refreshController.loadComplete();
       notifyListeners();
     } catch (error) {
       print(error);
@@ -93,6 +88,7 @@ class MainProvider extends ChangeNotifier  {
 
   //si quisiera primero buscar toda la informacion y luego mostrar la pantalla
   //se ve mejor pero el usuario puede sentir que es más lento
+  //se le tendria  que poner un progress a modo de dialog pero se pierde el hero
   void mostrarResumen( BuildContext context, int index ) async{
     await getOnePokemon( listaPokemons[index].id, false );
     await getPokemonSpecie(listaPokemons[index].id );

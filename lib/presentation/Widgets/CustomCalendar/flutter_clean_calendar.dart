@@ -223,17 +223,20 @@ class _CalendarState extends State<Calendar> {
     }
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         leftArrow ?? Container(),
         Column(
           children: <Widget>[
             todayIcon ?? Container(),
-            Text(
-              displayMonth,
-              style: TextStyle(
-                fontSize: 20.0,
-                color: widget.primaryColor != null ? Colors.white : Colors.black
+            Container(
+              margin: const EdgeInsets.only(left: 30, right: 30),
+              child: Text(
+                displayMonth,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: widget.primaryColor != null ? Colors.white : Colors.black
+                ),
               ),
             ),
           ],

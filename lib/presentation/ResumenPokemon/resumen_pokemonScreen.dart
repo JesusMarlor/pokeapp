@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:pokeapp/data/Utils/Utils.dart';
-import 'package:pokeapp/data/model/pokemon_model.dart';
-import 'package:pokeapp/presentation/Widgets/loading.dart';
+import '../../data/Utils/Utils.dart';
+import '../../data/model/pokemon_model.dart';
+import '../../presentation/Widgets/loading.dart';
 import 'package:provider/provider.dart';
 
 import '../../MainProvider.dart';
@@ -84,7 +83,7 @@ class  _ResumenPokemonScreenState extends State<ResumenPokemonScreen> {
             ),
             ///Contenedor principal de informacion
             Container(
-              height: MediaQuery.of(context).size.height * .63,
+              height: MediaQuery.of(context).size.height * .64,
               width: MediaQuery.of(context).size.width * .80,
               padding: const EdgeInsets.symmetric( vertical: 20, horizontal: 10),
               alignment: Alignment.centerLeft,
@@ -100,7 +99,7 @@ class  _ResumenPokemonScreenState extends State<ResumenPokemonScreen> {
                     child: FittedBox(
                         fit: BoxFit.fitWidth,
                         child: Text( mainProvider.pokemonModel?.name != null ? Utils.capitalize(mainProvider.pokemonModel?.name) : "",
-                            style:  TextStyle( fontSize: 40, color : Colors.black )
+                            style:  TextStyle( fontSize: 40, color : Colors.black, fontWeight: FontWeight.w800 )
                         )
                     ),
                   ),
@@ -111,7 +110,7 @@ class  _ResumenPokemonScreenState extends State<ResumenPokemonScreen> {
                     children: [
                       mainProvider.typeData.icon != null ? mainProvider.typeData.icon : Icon( Icons.whatshot, color: Colors.black  ),
                       SizedBox( width: 5 ),
-                      Text( mainProvider.typeData != null ? mainProvider.typeData.name : "", style: TextStyle( fontSize: 15 ) )
+                      Text( mainProvider.typeData != null ? mainProvider.typeData.name : "", style: TextStyle( fontSize: 15, fontWeight: FontWeight.w600 ) )
                     ],
                   ),
                   SizedBox( height: 50),
@@ -124,7 +123,9 @@ class  _ResumenPokemonScreenState extends State<ResumenPokemonScreen> {
                         child: Column(
                           children: [
                             Text( "Heigth", style: TextStyle( color: mainProvider.typeData != null ? mainProvider.typeData.primaryColor : Colors.black), ),
-                            Text("${mainProvider.pokemonModel?.height} D")
+                            mainProvider.pokemonModel?.height != null ?
+                            Text( Utils.convertDcToInch( mainProvider.pokemonModel?.height ), textAlign: TextAlign.center, style: TextStyle( fontWeight: FontWeight.w600))
+                                : SizedBox()
                           ],
                         ),
                       ),
@@ -133,7 +134,7 @@ class  _ResumenPokemonScreenState extends State<ResumenPokemonScreen> {
                           child: Column(
                             children: [
                               Text( "Weight", style: TextStyle( color: mainProvider.typeData != null ? mainProvider.typeData.primaryColor : Colors.black), ),
-                              Text("${mainProvider.pokemonModel?.weight} lbs")
+                              Text(Utils.convertHgrToLbs(mainProvider.pokemonModel?.weight), textAlign: TextAlign.center, style: TextStyle( fontWeight: FontWeight.w600))
                             ],
                           )
                       ),
@@ -142,7 +143,7 @@ class  _ResumenPokemonScreenState extends State<ResumenPokemonScreen> {
                         child: Column(
                           children: [
                             Text( "Category", style: TextStyle( color: mainProvider.typeData != null ? mainProvider.typeData.primaryColor : Colors.black), ),
-                            mainProvider.pokemonSpecie != null ? Text( mainProvider.pokemonSpecie.category != null ? mainProvider.pokemonSpecie.category : "-") : SizedBox()
+                            mainProvider.pokemonSpecie != null ? Text( mainProvider.pokemonSpecie.category != null ? mainProvider.pokemonSpecie.category : "-", textAlign: TextAlign.center, style: TextStyle( fontWeight: FontWeight.w600)) : SizedBox()
                           ],
                         ),
                       ),
@@ -150,8 +151,10 @@ class  _ResumenPokemonScreenState extends State<ResumenPokemonScreen> {
                         flex: 25,
                           child: Column(
                             children: [
-                              Text( "Abilities", style: TextStyle( color: mainProvider.typeData != null ? mainProvider.typeData.primaryColor : Colors.black), ),
-                              mainProvider.pokemonModel != null && mainProvider.pokemonModel.abilitiesString != null ?  Text(mainProvider.pokemonModel.abilitiesString) : SizedBox()
+                              Text( "Abilities", style: TextStyle( color: mainProvider.typeData != null ? mainProvider.typeData.primaryColor : Colors.black), textAlign: TextAlign.center, ),
+                              mainProvider.pokemonModel != null && mainProvider.pokemonModel.abilitiesString != null ?
+                              Text( mainProvider.pokemonModel.abilitiesString, textAlign: TextAlign.center)
+                                  : SizedBox()
                             ],
                           )
                       ),
@@ -159,9 +162,21 @@ class  _ResumenPokemonScreenState extends State<ResumenPokemonScreen> {
                   ),
                   SizedBox( height: 20 ),
                   mainProvider.pokemonSpecie != null ? Align(
-                      alignment: Alignment.center,
-                      child: Text( mainProvider.pokemonSpecie != null ? mainProvider.pokemonSpecie.descripcion :"", textAlign: TextAlign.justify)
-                  ) : Center( child : CircularProgressIndicator() ),
+                    alignment: Alignment.center,
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                        text: TextSpan(
+                          children: <TextSpan>[
+
+                            TextSpan(text: mainProvider.pokemonSpecie.descripcion, style: TextStyle(
+                                color: Colors.blueGrey,
+
+                            )),
+                          ],
+                        )
+                    ),
+                  ) : SizedBox(),
+
                   SizedBox(height: 20,),
                   mainProvider.pokemonModel != null && mainProvider.pokemonModel.stats != null ?
                   SizedBox(

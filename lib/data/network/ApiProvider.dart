@@ -14,7 +14,10 @@ class ApiProvider {
 
   ApiBaseHelper _helper = ApiBaseHelper();
 
+  /* deshabilitando querys dinamicos y fijarlos a 0, 20*/
   Future<List<PokemonModel>> fetchPokemons({int offset = 0, int limit = 20}) async {
+    offset=0;
+    limit=20;
     print("=====>ApiProvider=====>fetchPokemons");
     final path = 'pokemon?offset=$offset&limit=$limit';
     print("=======>path: $path");

@@ -9,12 +9,13 @@
 
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="Pokeapp"
-        android:icon="@mipmap/ic_launcher">
+        android:label="FlutterTEST"
+        android:icon="@mipmap/launcher_icon">
 
         <!-- key temporal, unicamente para revision de @AntonioVillegas01-->
         <!-- esta clave dajara de funcionar el 01/08/21 -->
-
+        <meta-data android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCtrm_AQCgTn0Jw7ojvxaAABk_TShTruTI"/>
 
         <activity
             android:name=".MainActivity"

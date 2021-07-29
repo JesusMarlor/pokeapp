@@ -72,8 +72,16 @@ class CalendarTile extends StatelessWidget {
     }
   }
 
-  Color colotText( bool isSelected ){
-
+  Color colotText( bool _isSelected, DateTime currentTime ){
+    if( _isSelected && currentTime != null ){
+      return  Colors.white;
+    }else if( CalendarUtils.isSameDay(currentTime, DateTime.now()) && ( events != null && events.length > 0 ) ){
+      return Colors.white;
+    }else if( events != null && events.length > 0  ){
+      return Colors.white;
+    }else{
+      return Colors.black;
+    }
   }
 
   /// This function [renderDateOrDayOfWeek] renders the week view or the month view. It is
@@ -133,11 +141,7 @@ class CalendarTile extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 14.0,
                       fontWeight: FontWeight.w400,
-                      color: isSelected && this.date != null ? Colors.white : CalendarUtils.isSameDay(this.date, DateTime.now())
-                          ? Colors.white
-                          : inMonth
-                          ?  Colors.black
-                          : Colors.black
+                      color: colotText( isSelected, this.date )
                   ), // Grey color for previous or next months dates
                 ),
                 // Dots for the events

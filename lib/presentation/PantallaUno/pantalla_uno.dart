@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:pokeapp/data/Utils/Utils.dart';
-import 'package:pokeapp/presentation/PantallaUno/PokemonCard/pokemon_card.dart';
-import 'package:pokeapp/presentation/ResumenPokemon/resumen_pokemonScreen.dart';
-import 'package:pokeapp/presentation/Widgets/loading.dart';
+import '../../data/Utils/Utils.dart';
+import '../../presentation/PantallaUno/PokemonCard/pokemon_card.dart';
+import '../../presentation/ResumenPokemon/resumen_pokemonScreen.dart';
+import '../../presentation/Widgets/loading.dart';
 import 'package:provider/provider.dart';
 import '../../MainProvider.dart';
-import '../../data/model/pokemon_model.dart';
 
 ///acostumbro a poner el sufijo Screen para indicar que la clase se refiere a una pantalla
 ///en este caso es redundante pero solo es por fines practivos
@@ -58,7 +57,7 @@ class  _PantallaUnoScreenState extends State<PantallaUnoScreen>{
     return Column(
       children: [
         const SizedBox(height: 50,),
-        const Text("CHOOSE YOU POKEMON", style: TextStyle( fontSize: 25, color: Colors.grey)),
+        const Text("CHOOSE YOU POKEMON", style: TextStyle( fontSize: 20, color: Colors.grey, fontWeight: FontWeight.w800)),
         mainProvider.listaPokemons != null && mainProvider.listaPokemons.isNotEmpty ?
         Expanded(
           child: RefreshIndicator(

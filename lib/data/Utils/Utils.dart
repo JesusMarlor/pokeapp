@@ -145,6 +145,20 @@ class Utils{
     }
 
   }
+
+  static String convertDcToInch( double dc ){
+    double meter = dc / 10;
+    String first = (meter * 39.3701).toStringAsFixed(2);
+    List<String> parts = first.split(".");
+
+    return parts.length > 1 ? "${parts[0]}\'${parts[1]}\'\'" : "${parts[0]}\'";
+  }
+
+  static String convertHgrToLbs( double hgr ){
+    double kilo = hgr * 10;
+    String first = (hgr * 0.220462).toStringAsFixed(2);
+    return "$first lbs";
+  }
 }
 
 class Constantes{

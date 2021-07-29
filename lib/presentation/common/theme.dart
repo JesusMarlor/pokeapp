@@ -21,4 +21,13 @@ final pokeGradients = [
   PokeAppColors.ligthBlue
 ];
 
-final lightTheme = ThemeData();
+
+class CalendarColors{
+  static final primary = Color(0xff4e64f6);
+}
+
+class MapColors{
+  static final green = Color(0xff52B268);
+  static final grey = Color(0xffc4c4c4);
+}
+

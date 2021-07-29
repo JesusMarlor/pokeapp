@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
       child: Consumer<MainProvider>(
           builder: ( context, provider, _){
             return MaterialApp(
-              title: 'PokeApp',
+              title: 'FlutterTest',
               debugShowCheckedModeBanner: false,
               home: HomeScreen(),
             );

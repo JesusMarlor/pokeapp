@@ -67,9 +67,9 @@ class  _HomeScreenState extends State<HomeScreen>{
                   duration: Duration(milliseconds: 300), curve: Curves.ease);
             },
             items: [
-              BottomBarItem(icon: Icon(Icons.home_outlined), title: Text("Inicio")),
-              BottomBarItem(icon: Icon(Icons.calendar_today_outlined), title: Text("Página 2")),
-              BottomBarItem(icon: Icon(Icons.map_outlined), title: Text("Página 3")),
+              BottomBarItem(icon: Icon(Icons.home_outlined), title: Text("Menu 1")),
+              BottomBarItem(icon: Icon(Icons.calendar_today_outlined), title: Text("Menu 2")),
+              BottomBarItem(icon: Icon(Icons.map_outlined), title: Text("Menu 3")),
             ],
           ),
         );
