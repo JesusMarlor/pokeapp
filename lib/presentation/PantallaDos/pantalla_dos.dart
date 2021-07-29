@@ -33,7 +33,7 @@ class  _PantallaDosScreenState extends State<PantallaDosScreen>{
     ],
 
     DateTime(DateTime.now().year, DateTime.now().month, 8) : [
-      CleanCalendarEvent('Holiday',
+      CleanCalendarEvent('Test',
           startTime: DateTime(DateTime.now().year, DateTime.now().month, 8, 10, 0),
           endTime: DateTime(DateTime.now().year, DateTime.now().month, 8, 10, 0),
           description: 'Geometry weekly test',
