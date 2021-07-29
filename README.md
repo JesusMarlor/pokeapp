@@ -33,9 +33,20 @@ Menú 2: Replicación UI de componente tipo mapa
     <img src="https://github.com/JesusMarlor/pokeapp/blob/master/img4.png?raw=true" width="250" height="450" />
 </div>
 
+
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Compilado listo para instalar: https://drive.google.com/file/d/1puiclvpk1Zn7G2MYRLNqUwEIxNVtroUq/view?usp=sharing
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Video demostración: https://drive.google.com/file/d/1MHO5sDrsvw-GX-fWTAO0TLXfJ_XJxVsJ/view
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+<p>
 Fecha y hora de inicio: 27/07/2021 11:35 AM
 Fecha y hora de término: 29/07/2021 02:13 AM
+</p>
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 L.C.C Jesus Marfil
