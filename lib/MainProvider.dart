@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokeapp/data/Utils/Utils.dart';
 import 'package:pokeapp/data/model/pokemon_model.dart';
+import 'package:pokeapp/data/model/pokemon_specie.dart';
+import 'package:pokeapp/presentation/ResumenPokemon/resumen_pokemonScreen.dart';
 import 'package:pokeapp/repository/pokemon_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -12,8 +14,11 @@ class MainProvider extends ChangeNotifier  {
   int selectedTabIndex = 0;
   PokemonRepository pokemonRepository = PokemonRepository();
   RefreshController refreshController = RefreshController(initialRefresh: false);
-  List<PokemonModel> lista_pokemons = [];
+  List<PokemonModel> listaPokemons = [];
   bool loading = false;
+  PokemonModel pokemonModel;
+  PokemonSpecie pokemonSpecie;
+  TypeData typeData;
 
   void onThemeUpdated( bool isDark ){
     isDarkMode = isDark;
@@ -32,13 +37,12 @@ class MainProvider extends ChangeNotifier  {
     print("======>getAllPokemons");
     try {
       if( reiniciar ){
-        lista_pokemons.clear();
+        listaPokemons.clear();
       }
       final pokemons = await this.pokemonRepository.fetchPokemons();
-      print("==>pokemons length: ${pokemons.length}");
-      lista_pokemons.addAll(pokemons);
+      listaPokemons.addAll(pokemons);
 
-      lista_pokemons.forEach((element) {
+      listaPokemons.forEach((element) {
         element.type = Utils.getType(element.name);
       });
       refreshController.refreshCompleted();
@@ -50,14 +54,56 @@ class MainProvider extends ChangeNotifier  {
 
   }
 
-  Future<void> getOnePokemon( String id ) async{
-    print("====>getOnePokemon");
+  Future<void> getOnePokemon( String id, bool buscarSpecie ) async{
+    print("======>getOnePokemon");
     try {
-      final pokemons = await this.pokemonRepository.fetchResumenPokemon( id );
-      print( pokemons );
+      pokemonModel = await this.pokemonRepository.fetchResumenPokemon( id );
+      print( pokemonModel.name );
+      if( pokemonModel.type == null ) {
+        if( pokemonModel.types != null && pokemonModel.types.isNotEmpty ){
+          pokemonModel.type = pokemonModel.types.first.type.name;
+          typeData = Utils.getDataType(pokemonModel.type);
+        }
+      }
+      List<String> listTemp = [];
+      pokemonModel.abilities.forEach((element) {listTemp.add(element["ability"]["name"]);});
+      pokemonModel.abilitiesString = listTemp.join(", ");
+      notifyListeners();
+      if( buscarSpecie ) {
+        getPokemonSpecie(id);
+      }
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  Future<PokemonSpecie> getPokemonSpecie( String id ) async {
+    print("======>getPokemonSpecie");
+    try {
+      pokemonSpecie = await this.pokemonRepository.fetchPokemonSpecies( id );
+      Map<String,dynamic> category = pokemonSpecie.genera.firstWhere((element) => element["language"]["name"] == "en" );
+      Map<String,dynamic> flavor   = pokemonSpecie.flavorTextEntries.firstWhere((element) => element["language"]["name"] == "en" && element["version"]["name"] == "ruby" );
+      pokemonSpecie.category = category["genus"];
+      pokemonSpecie.descripcion = flavor["flavor_text"];
       notifyListeners();
     } catch (error) {
       print(error);
     }
   }
+
+  //si quisiera primero buscar toda la informacion y luego mostrar la pantalla
+  //se ve mejor pero el usuario puede sentir que es más lento
+  void mostrarResumen( BuildContext context, int index ) async{
+    await getOnePokemon( listaPokemons[index].id, false );
+    await getPokemonSpecie(listaPokemons[index].id );
+    Navigator.push(context, MaterialPageRoute(builder: (_)=>  ResumenPokemonScreen( pokemonModel : listaPokemons[index] )));
+  }
+
+  void reiniciarValores(){
+    pokemonSpecie = null;
+    pokemonModel  = null;
+    typeData      = null;
+    notifyListeners();
+  }
 }
+

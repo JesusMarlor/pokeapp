@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:pokeapp/data/Utils/Utils.dart';
-import 'package:pokeapp/presentation/PantallaUno/PokemonCard/PokemonCard.dart';
-import 'package:pokeapp/presentation/Widgets/Loading.dart';
+import 'package:pokeapp/presentation/PantallaUno/PokemonCard/pokemon_card.dart';
+import 'package:pokeapp/presentation/ResumenPokemon/resumen_pokemonScreen.dart';
+import 'package:pokeapp/presentation/Widgets/loading.dart';
 import 'package:provider/provider.dart';
 import '../../MainProvider.dart';
 import '../../data/model/pokemon_model.dart';
@@ -58,24 +59,28 @@ class  _PantallaUnoScreenState extends State<PantallaUnoScreen>{
       children: [
         const SizedBox(height: 50,),
         const Text("CHOOSE YOU POKEMON", style: TextStyle( fontSize: 25, color: Colors.grey)),
-        mainProvider.lista_pokemons != null && mainProvider.lista_pokemons.isNotEmpty ?
+        mainProvider.listaPokemons != null && mainProvider.listaPokemons.isNotEmpty ?
         Expanded(
           child: RefreshIndicator(
             onRefresh: ()=> mainProvider.getAllPokemons(true),
             child: ListView.builder(
                 controller: scrollController,
-                itemCount: mainProvider.lista_pokemons.length,
+                itemCount: mainProvider.listaPokemons.length,
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                       onTap: (){
                         print("open new screen");
+                        final parts = mainProvider.listaPokemons[index].url.split('/');
+                        mainProvider.listaPokemons[index].id = parts[6];
+                        Navigator.push(context, MaterialPageRoute(builder: (_)=>  ResumenPokemonScreen( pokemonModel : mainProvider.listaPokemons[index] )));
+                        //mainProvider.mostrarResumen(context, index);
                       },
-                      child: PokemonCard( pokemon: mainProvider.lista_pokemons[index] )
+                      child: PokemonCard( pokemon: mainProvider.listaPokemons[index] )
                   );
                 }
             ),
           )
-        ) : Loading( tipo_progress: Constantes.CODE_PROGRESS_BUSCANDO, titleTxt: "Buscando, espere un momento..", subTxt: "",)
+        ) : Center(child: Loading( tipo_progress: Constantes.CODE_PROGRESS_BUSCANDO, titleTxt: "Buscando, espere un momento..", subTxt: "",))
       ],
     );
   }

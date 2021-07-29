@@ -7,7 +7,7 @@ part of 'pokemon_type.dart';
 PokemonType _$PokemonTypeFromJson(Map<String, dynamic> json) {
   return PokemonType(
     slot:  json['slot'] as int,
-    type: json['type'] as TypeObj,
+    type: TypeObj.fromJson(json["type"]),
   );
 }
 

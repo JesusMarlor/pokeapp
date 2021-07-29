@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:pokeapp/data/model/pokemon_model.dart';
+import 'package:pokeapp/data/model/pokemon_specie.dart';
 
 import '../../data/model/pokemon_model.dart';
 import '../../data/model/Pokemon_response.dart';
@@ -38,9 +39,19 @@ class ApiProvider {
   Future<PokemonModel> getResumenPokemon( String id ) async{
     print("====>getResumenPokemon");
     final path = 'pokemon/$id';
-    final response = await _helper.get(path);
+    final responseString = await _helper.get(path);
+    final response = PokemonModel.fromJson( responseString );
     print( response );
-    return PokemonModel.fromJson( response );
+    return response;
+  }
+
+  Future<PokemonSpecie> getPokemonSpecie( String id ) async{
+    print("====>getResumenPokemon");
+    final path = 'pokemon-species/$id';
+    final responseString = await _helper.get(path);
+    final response = PokemonSpecie.fromJson( responseString );
+    print( response );
+    return response;
   }
 
 }

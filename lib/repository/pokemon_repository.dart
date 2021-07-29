@@ -1,4 +1,6 @@
 
+import 'package:pokeapp/data/model/pokemon_specie.dart';
+
 import '../data/model/pokemon_model.dart';
 import '../data/network/ApiProvider.dart';
 
@@ -29,6 +31,12 @@ class PokemonRepository {
     print("===>fetchResumenPokemon");
     PokemonModel _pokemon = await apiProvider.getResumenPokemon(id);
     return _pokemon;
-
   }
+
+  Future<PokemonSpecie> fetchPokemonSpecies( String id ) async{
+    print("===>fetchResumenPokemon");
+    PokemonSpecie _pokemon = await apiProvider.getPokemonSpecie(id);
+    return _pokemon;
+  }
+
 }

@@ -14,8 +14,7 @@
 
         <!-- key temporal, unicamente para revision de @AntonioVillegas01-->
         <!-- esta clave dajara de funcionar el 01/08/21 -->
-        <meta-data android:name="com.google.android.maps.v2.API_KEY"
-            android:value="<api-key>"/>
+
 
         <activity
             android:name=".MainActivity"

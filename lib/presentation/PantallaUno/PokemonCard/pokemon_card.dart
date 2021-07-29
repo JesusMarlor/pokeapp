@@ -60,16 +60,19 @@ class PokemonCard extends StatelessWidget{
               Positioned(
                 right: 5,
                 top: 0,
-                child: Container(
-                    height: height+15,
-                    width: height,
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all( Radius.circular(5.0) ),
-                      image: DecorationImage(
-                          //image: NetworkImage( 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${imageId}.png'), fit: BoxFit.cover),
-                          image: NetworkImage( 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${imageId}.png'), fit: BoxFit.fitHeight),
+                child: Hero(
+                  tag: "pokemonId$imageId",
+                  child: Container(
+                      height: height+15,
+                      width: height,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.all( Radius.circular(5.0) ),
+                        image: DecorationImage(
+                            //image: NetworkImage( 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${imageId}.png'), fit: BoxFit.cover),
+                            image: NetworkImage( 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/$imageId.png'), fit: BoxFit.fitHeight),
+                      ),
                     ),
-                  ),
+                ),
               )
 
             ],

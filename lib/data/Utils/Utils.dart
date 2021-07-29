@@ -17,6 +17,7 @@ class Utils{
     return cadena[0].toUpperCase() + cadena.substring(1);
   }
 
+  ///esta ruta indica los colores https://pokeapi.co/api/v2/pokemon-color/$id
   static TypeData getDataType( String type ){
 
     switch( type ) {

@@ -2,6 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'type_obj.g.dart';
 
+
+@JsonSerializable()
 class TypeObj{
   String name;
   String url;
