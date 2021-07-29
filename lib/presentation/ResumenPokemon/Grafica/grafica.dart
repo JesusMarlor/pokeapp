@@ -24,7 +24,8 @@ class Grafica extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Container(
+              AnimatedContainer(
+                duration: const Duration(seconds: 1),
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: color,
